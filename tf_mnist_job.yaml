@@ -1,0 +1,22 @@
+apiVersion: "kubeflow.org/v1alpha2"
+kind: "TFJob"
+metadata:
+  name: "dist-mnist-pct"
+spec:
+  tfReplicaSpecs:
+    PS:
+      replicas: 1
+      restartPolicy: Never
+      template:
+        spec:
+          containers:
+            - name: tensorflow
+              image: emsixteeen/tf-dist-mnist-test:1.0
+    Worker:
+      replicas: 2
+      restartPolicy: Never
+      template:
+        spec:
+          containers:
+            - name: tensorflow
+              image: emsixteeen/tf-dist-mnist-test:1.0
